@@ -1,0 +1,28 @@
+version: '2.2'
+services:
+  csvreader:
+    image: infracloudio/csvserver
+
+    container_name: sachin
+    ports:
+    - "9393:9300"
+    volumes:
+     - "/csvserver/solution/inputdata:/csvserver/inputdata"
+    environment:
+      - "CSVSERVER_BORDER=Orange"
+    networks:
+      - pro
+  prometheus:
+    image: prom/prometheus:v2.22.0
+    container_name: promo
+    volumes:
+      - /csvserver/solution/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - 9090:9090
+    networks:
+      - pro
+
+networks:
+  pro:
+    driver: bridge
+

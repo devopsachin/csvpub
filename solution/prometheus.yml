@@ -1,0 +1,8 @@
+scrape_configs:
+- job_name: "sachin"
+  scrape_interval: 5s
+  metrics_path: "/metrics"
+  static_configs:
+   - targets: ['sachin:9300']
+     labels:
+       alias: "sachin"
